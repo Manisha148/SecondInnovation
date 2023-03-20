@@ -18,7 +18,15 @@ pipeline {
                  
             }
         }
-        
+     stages {
+        stage('Example') {
+            steps {
+                withEnv(['OPEN_AI_API=OPEN_AI_API']) {
+                    sh 'echo $OPEN_AI_API'
+                }
+            }
+        }
+    }    
        
   
     // Building Docker images
