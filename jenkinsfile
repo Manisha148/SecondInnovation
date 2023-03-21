@@ -17,23 +17,14 @@ pipeline {
                 }
                  
             }
-        }
-     stages {
-        stage('Example') {
-            steps {
-                withEnv(['OPEN_AI_API=OPEN_AI_API']) {
-                    sh 'echo $OPEN_AI_API'
-                }
-            }
-        }
-    }    
+        }   
        
   
     // Building Docker images
     stage('Building image') {
       steps{
         script {
-          dockerImage = 'docker.build ${IMAGE_REPO_NAME}:${IMAGE_TAG}'
+          dockerImage = 'docker build --build-arg OPENAI_API_KEY= OPENAI_API_KEY -t  ${IMAGE_REPO_NAME}:${IMAGE_TAG}'
         }
       }
     }
