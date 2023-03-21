@@ -35,8 +35,8 @@ pipeline {
     stage('Pushing to ECR') {
      steps{  
          script {
-                sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:${IMAGE_TAG}"
-                sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${REPOSITORY_URI}:${IMAGE_TAG}"
+                sh "docker tag pythonflask:latest 269001393029.dkr.ecr.us-east-1.amazonaws.com/pythonflask:latest"
+                sh "docker push 269001393029.dkr.ecr.us-east-1.amazonaws.com/pythonflask:latest"
          }
         }
       }
