@@ -25,8 +25,8 @@ pipeline {
       steps{
         script {
               
-               dockerImage = sh 'docker build -t 269001393029.dkr.ecr.us-east-1.amazonaws.com/pythonflask:latest .'
-               sh 'docker run -id -d -p 8888:8888 -e OPENAI_API_KEY="${OPENAI_API_KEY}":269001393029.dkr.ecr.us-east-1.amazonaws.com/pythonflask:latest'
+              dockerImage = sh 'docker build -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} .'
+          sh 'docker run -id -d -p 8888:8888 -e OPENAI_API_KEY="${OPENAI_API_KEY}" ${IMAGE_REPO_NAME}:${IMAGE_TAG}'
         }
       }
     }
@@ -35,8 +35,8 @@ pipeline {
     stage('Pushing to ECR') {
      steps{  
          script {
-                sh "docker tag pythonflask:latest 269001393029.dkr.ecr.us-east-1.amazonaws.com/pythonflask:latest"
-                sh "docker push 269001393029.dkr.ecr.us-east-1.amazonaws.com/pythonflask:latest"
+                sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:${IMAGE_TAG}"
+                sh "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"
          }
         }
       }
