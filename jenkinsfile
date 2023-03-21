@@ -24,7 +24,7 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          dockerImage = 'docker build --build-arg OPENAI_API_KEY= OPENAI_API_KEY -t  ${IMAGE_REPO_NAME}:${IMAGE_TAG}'
+          dockerImage = 'docker.build("${IMAGE_REPO_NAME}:${IMAGE_TAG}", "--build-arg API_KEY=API_KEY")'
         }
       }
     }
