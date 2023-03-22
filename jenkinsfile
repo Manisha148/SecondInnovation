@@ -7,7 +7,7 @@ pipeline {
         IMAGE_TAG="latest"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
         ARG OPENAI_API_KEY
-        ENV OPENAI_API_KEY $OPENAI_API_KEY
+        ENV MY_ENV_VAR $OPENAI_API_KEY
 
     }
    
