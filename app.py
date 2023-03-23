@@ -1,24 +1,10 @@
-from flask import Flask, render_template, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request
 import json
 import datetime
 import openai
 import os
 
 app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-
-    def __repr__(self):
-        return '<User %r>' % self.name
 app.config["Debug"] = True
 
 # openai.api_key_path='apikey'
@@ -35,11 +21,6 @@ class MyFlaskApp(Flask):
 
     def index(self):
         return render_template('index.html')
-    
-    def users():
-    users = User.query.all()
-    return jsonify([{'name': u.name, 'email': u.email} for u in users])
-    
 
     def page_not_found(self, e):
         return render_template('404.html'), 404
